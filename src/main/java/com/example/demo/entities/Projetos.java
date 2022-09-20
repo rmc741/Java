@@ -12,13 +12,16 @@ public class Projetos {
     private String projectName;
     @Column(name = "descricao")
     private String projectDescription;
+    @Column(name = "finalizado")
+    private boolean finished;
 
     public Projetos() {
     }
 
-    public Projetos(String projectName, String projectDescription) {
+    public Projetos(String projectName, String projectDescription , boolean finished) {
         this.projectName = projectName;
         this.projectDescription = projectDescription;
+        this.finished = finished;
     }
 
     public Long getId() {
@@ -41,12 +44,21 @@ public class Projetos {
         this.projectDescription = projectDescription;
     }
 
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
     @Override
     public String toString() {
         return "Projetos{" +
                 "id=" + id +
                 ", projectName='" + projectName + '\'' +
                 ", projectDescription='" + projectDescription + '\'' +
+                ", finished=" + finished +
                 '}';
     }
 }

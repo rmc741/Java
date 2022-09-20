@@ -7,6 +7,8 @@ public class ProjetosDTO {
     private String projectName;
     private String projectDescription;
 
+    private boolean finished;
+
     public ProjetosDTO() {
     }
 
@@ -15,6 +17,7 @@ public class ProjetosDTO {
         this.id = projeto.getId();
         this.projectName = projeto.getProjectName();
         this.projectDescription = projeto.getProjectDescription();
+        this.finished = projeto.isFinished();
     }
 
     public Long getId() {
@@ -35,5 +38,13 @@ public class ProjetosDTO {
 
     public void setProjectDescription(String projectDescription) {
         this.projectDescription = projectDescription;
+    }
+
+    public boolean getFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }

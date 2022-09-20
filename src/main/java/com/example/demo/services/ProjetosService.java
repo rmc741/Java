@@ -29,7 +29,7 @@ public class ProjetosService {
     }
 
     public Projetos adicionarProjeto(final ProjetosDTO projetosDTO){
-        return projetosRepository.save(new Projetos(projetosDTO.getProjectName() , projetosDTO.getProjectDescription()));
+        return projetosRepository.save(new Projetos(projetosDTO.getProjectName() , projetosDTO.getProjectDescription() , false));
     }
 
     public Projetos atualizarProjeto(final Long projetoId , @Valid final ProjetosDTO projetosDTO){
@@ -37,6 +37,7 @@ public class ProjetosService {
 
         projeto.setProjectName(projetosDTO.getProjectName());
         projeto.setProjectDescription(projetosDTO.getProjectDescription());
+        projeto.setFinished(projetosDTO.getFinished());
 
         return projetosRepository.save(projeto);
     }
