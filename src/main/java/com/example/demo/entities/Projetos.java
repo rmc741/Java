@@ -1,6 +1,9 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -15,10 +18,12 @@ public class Projetos {
     @Column(name = "finalizado")
     private boolean finished;
 
+
     public Projetos() {
     }
 
     public Projetos(String projectName, String projectDescription , boolean finished) {
+        super();
         this.projectName = projectName;
         this.projectDescription = projectDescription;
         this.finished = finished;
