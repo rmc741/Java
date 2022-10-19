@@ -1,21 +1,26 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.DatabaseFile;
+import com.example.demo.entities.Projetos;
 import com.example.demo.exception.FileNotFoundException;
 import com.example.demo.exception.FileStorageException;
 import com.example.demo.repository.DatabaseFileRepository;
+import com.example.demo.repository.ProjetosRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class DatabaseFileService {
 
+    private ProjetosRepository projetosRepository;
     private DatabaseFileRepository databaseFileRepository;
 
-    public DatabaseFileService(DatabaseFileRepository databaseFileRepository) {
+    public DatabaseFileService(ProjetosRepository projetosRepository, DatabaseFileRepository databaseFileRepository) {
+        this.projetosRepository = projetosRepository;
         this.databaseFileRepository = databaseFileRepository;
     }
 
@@ -43,5 +48,13 @@ public class DatabaseFileService {
     //Metodo para pegar arquivo na base pelo id
     public DatabaseFile getFileById(Long fileId){
         return databaseFileRepository.findById(fileId).orElseThrow(() -> new FileNotFoundException("Não foi possivel encontrar arquivo pelo ID: " + fileId));
+    }
+
+    public List<DatabaseFile> getAll(){
+        return databaseFileRepository.findAll();
+    }
+
+    public List<DatabaseFile> getAllByProjectId(Long projetoId){
+        return databaseFileRepository.findByProjectId(projetoId);
     }
 }

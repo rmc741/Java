@@ -18,6 +18,10 @@ public class Projetos {
     @Column(name = "finalizado")
     private boolean finished;
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetos")
+    private List<DatabaseFile> projectImage;
+
 
     public Projetos() {
     }
@@ -27,6 +31,13 @@ public class Projetos {
         this.projectName = projectName;
         this.projectDescription = projectDescription;
         this.finished = finished;
+    }
+
+    public Projetos(String projectName, String projectDescription, boolean finished, List<DatabaseFile> projectImage) {
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+        this.finished = finished;
+        this.projectImage = projectImage;
     }
 
     public Long getId() {
@@ -55,6 +66,14 @@ public class Projetos {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public List<DatabaseFile> getProjectImage() {
+        return projectImage;
+    }
+
+    public void setProjectImage(List<DatabaseFile> projectImage) {
+        this.projectImage = projectImage;
     }
 
     @Override

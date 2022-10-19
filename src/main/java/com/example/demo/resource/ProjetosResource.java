@@ -1,15 +1,17 @@
 package com.example.demo.resource;
 
 import com.example.demo.dto.ProjetosDTO;
+import com.example.demo.entities.DatabaseFile;
 import com.example.demo.entities.Projetos;
+import com.example.demo.services.DatabaseFileService;
 import com.example.demo.services.ProjetosService;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +22,18 @@ public class ProjetosResource {
 
     private final ProjetosService projetosService;
 
-    public ProjetosResource(ProjetosService projetosService) {
+    private final DatabaseFileService databaseFileService;
+
+    public ProjetosResource(ProjetosService projetosService, DatabaseFileService databaseFileService) {
         this.projetosService = projetosService;
+        this.databaseFileService = databaseFileService;
+    }
+
+
+    @GetMapping("/fotos/{projectId}")
+    public ResponseEntity<List<DatabaseFile>> pegaImagens(@PathVariable final Long projectId){
+        List<DatabaseFile> files = databaseFileService.getAllByProjectId(projectId);
+        return ResponseEntity.ok().body(files);
     }
 
     @GetMapping("/all")
