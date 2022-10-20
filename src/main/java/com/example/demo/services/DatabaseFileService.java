@@ -54,7 +54,4 @@ public class DatabaseFileService {
         return databaseFileRepository.findAll();
     }
 
-    public List<DatabaseFile> getAllByProjectId(Long projetoId){
-        return databaseFileRepository.findByProjectId(projetoId);
-    }
 }

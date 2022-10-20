@@ -1,8 +1,10 @@
 package com.example.demo.services;
 
 import com.example.demo.dto.ProjetosDTO;
+import com.example.demo.entities.DatabaseFile;
 import com.example.demo.entities.Projetos;
 import com.example.demo.exception.ObjectNotFoundException;
+import com.example.demo.repository.DatabaseFileRepository;
 import com.example.demo.repository.ProjetosRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,12 @@ import java.util.Optional;
 public class ProjetosService {
 
     private final ProjetosRepository projetosRepository;
+    private final DatabaseFileRepository databaseFileRepository;
 
 
-    public ProjetosService(ProjetosRepository projetosRepository) {
+    public ProjetosService(ProjetosRepository projetosRepository, DatabaseFileRepository databaseFileRepository) {
         this.projetosRepository = projetosRepository;
+        this.databaseFileRepository = databaseFileRepository;
     }
 
     public List<Projetos> buscarTodos(){ return projetosRepository.findAll(); }
@@ -46,5 +50,9 @@ public class ProjetosService {
         Projetos projeto = buscarProjetoId(projetoId);
 
         projetosRepository.delete(projeto);
+    }
+
+    public DatabaseFile getAllImagensByProjectId(final Long projectId){
+        return databaseFileRepository.findByProjectId(projectId);
     }
 }

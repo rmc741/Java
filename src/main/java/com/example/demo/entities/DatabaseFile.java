@@ -1,5 +1,7 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +17,7 @@ public class DatabaseFile {
     @Lob
     private byte[] data;
 
-    @ManyToOne
+    @ManyToOne @JsonIgnore
     @JoinColumn(name = "projects", referencedColumnName = "id")
     private Projetos projetos;
 
