@@ -6,9 +6,11 @@ import com.example.demo.entities.Projetos;
 import com.example.demo.exception.ObjectNotFoundException;
 import com.example.demo.repository.DatabaseFileRepository;
 import com.example.demo.repository.ProjetosRepository;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +54,10 @@ public class ProjetosService {
         projetosRepository.delete(projeto);
     }
 
-    public DatabaseFile getAllImagensByProjectId(final Long projectId){
-        return databaseFileRepository.findByProjectId(projectId);
+    public List<ByteArrayResource> getAllImagensByProjectId(final Long projectId){
+        List<ByteArrayResource> imagemData = new ArrayList<>();
+        List<DatabaseFile> databaseFilesList = databaseFileRepository.findByProjectId(projectId);
+        databaseFilesList.forEach(obj -> imagemData.add(new ByteArrayResource(obj.getData())));
+        return imagemData;
     }
 }

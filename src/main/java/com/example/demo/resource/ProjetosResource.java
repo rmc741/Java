@@ -7,6 +7,7 @@ import com.example.demo.services.DatabaseFileService;
 import com.example.demo.services.ProjetosService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,22 +35,11 @@ public class ProjetosResource {
 
 
     @GetMapping("/fotos/{projectId}")
-    public ResponseEntity<ByteArrayResource> pegaImagens(@PathVariable final Long projectId , HttpServletRequest request){
-        // Load file as Resource
-        /*DatabaseFile databaseFile = fileStorageService.getFileById(fileId);
+    public ResponseEntity<List<ByteArrayResource>> pegaImagens(@PathVariable final Long projectId , HttpServletRequest request){
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(databaseFile.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + databaseFile.getFileName() + "\"")
-                .body(new ByteArrayResource(databaseFile.getData()));*/
-        //List<DatabaseFile> files = databaseFileService.getAllByProjectId(projectId);
-        DatabaseFile files =  projetosService.getAllImagensByProjectId(projectId);
+        List <ByteArrayResource> images = projetosService.getAllImagensByProjectId(projectId);
 
-        ByteArrayResource projectImages = new ByteArrayResource(files.getData());
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(files.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION , "attachment; filename=\"" + files.getFileName() + "\"")
-                .body(projectImages);
+        return new ResponseEntity<>(images, HttpStatus.OK);
     }
 
     @GetMapping("/all")
