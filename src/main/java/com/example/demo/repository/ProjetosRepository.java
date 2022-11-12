@@ -11,4 +11,6 @@ public interface ProjetosRepository extends JpaRepository<Projetos , Long> {
     Optional<Projetos> findById(Long id);
     //List<Projetos> findByTitleContaining(String projectName);
 
+    List<Projetos> findByProjectNameContaning(String projectName);
+
 }
