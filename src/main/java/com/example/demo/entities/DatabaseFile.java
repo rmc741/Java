@@ -17,9 +17,9 @@ public class DatabaseFile {
     @Lob
     private byte[] data;
 
-    @ManyToOne @JsonIgnore
-    @JoinColumn(name = "projects", referencedColumnName = "id")
-    private Projetos projetos;
+//    @ManyToOne
+//    @JoinColumn(name = "projects", referencedColumnName = "id")
+//    private Projetos projetos;
 
 
     public DatabaseFile() {
@@ -31,12 +31,12 @@ public class DatabaseFile {
         this.data = data;
     }
 
-    public DatabaseFile(String fileName, String fileType, byte[] data , Projetos projetos) {
-        this.fileName = fileName;
-        this.fileType = fileType;
-        this.data = data;
-        this.projetos = projetos;
-    }
+//    public DatabaseFile(String fileName, String fileType, byte[] data , Projetos projetos) {
+//        this.fileName = fileName;
+//        this.fileType = fileType;
+//        this.data = data;
+//        this.projetos = projetos;
+//    }
 
     public Long getId() {
         return id;
@@ -66,11 +66,11 @@ public class DatabaseFile {
         this.data = data;
     }
 
-    public Projetos getProjetos() {
-        return projetos;
-    }
-
-    public void setProjetos(Projetos projetos) {
-        this.projetos = projetos;
-    }
+//    public Projetos getProjetos() {
+//        return projetos;
+//    }
+//
+//    public void setProjetos(Projetos projetos) {
+//        this.projetos = projetos;
+//    }
 }
